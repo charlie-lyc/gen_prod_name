@@ -1,6 +1,8 @@
 // import logo from './logo.svg'
 import './App.css'
 import React, { useState, useEffect } from 'react'
+import * as XLSX from 'xlsx'
+
 
 function shuffleArray(array) {
   return array
@@ -75,6 +77,24 @@ function App() {
     setResult([])
   }
 
+  const downloadExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(
+      result.map((res, index) => ({ 번호: index + 1, 결과: res, 길이: res.length }))
+    )
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, '상품명 리스트')
+    XLSX.writeFile(workbook, str1 + ' - 상품명.xlsx')
+  }
+  // const downloadCSV = () => {
+  //   const csvContent = result.map((res, index) => `${index + 1},${res},${res.length}`).join('\n')
+  //   const blob = new Blob([`번호,결과,길이\n${csvContent}`], { type: 'text/csv;charset=utf-8;' })
+  //   const link = document.createElement('a')
+  //   const url = URL.createObjectURL(blob)
+  //   link.setAttribute('href', url)
+  //   link.setAttribute('download', '상품명.csv')
+  //   link.click()
+  // }
+
   if (!isAuthenticated) {
     return (
       <div className="container">
@@ -124,6 +144,10 @@ function App() {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="button-group">
+        <button onClick={downloadExcel}>Excel</button>
+        {/* <button onClick={downloadCSV}>CSV</button> */}
       </div>
     </div>
   )
