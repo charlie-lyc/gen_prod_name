@@ -135,20 +135,27 @@ function App() {
         <button onClick={handleGenerateResults}>결과 생성</button>
         <button onClick={handleClearInputs}>입력 초기화</button>
       </div>
-      <div className="output">
-        <h2>상품명 (50자 이하) :</h2>
-        <ul>
-          {result.map((res, index) => (
-            <li key={index}>
-            {index + 1}. {res} <span className="result-length">(길이: {res.length})</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="button-group">
-        <button onClick={downloadExcel}>Excel</button>
-        {/* <button onClick={downloadCSV}>CSV</button> */}
-      </div>
+
+      {
+        result.length > 0 &&
+        <>
+          <div className="output">
+            <h2>상품명 (50자 이하)</h2>
+            <ul>
+              {result.map((res, index) => (
+                <li key={index}>
+                {index + 1}. {res} <span className="result-length">(길이: {res.length})</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="button-group">
+            <button onClick={downloadExcel}>Download Excel</button>
+            {/* <button onClick={downloadCSV}>Download CSV</button> */}
+          </div>
+        </>
+      }
+
     </div>
   )
 }
