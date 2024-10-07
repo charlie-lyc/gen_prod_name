@@ -150,8 +150,8 @@ function App() {
             </ul>
           </div>
           <div className="button-group">
-            <button onClick={downloadExcel}>Download Excel</button>
-            {/* <button onClick={downloadCSV}>Download CSV</button> */}
+            <button onClick={downloadExcel}>엑셀 다운로드</button>
+            {/* <button onClick={downloadCSV}>CSV 다운로드</button> */}
           </div>
         </>
       }
